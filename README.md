@@ -30,12 +30,13 @@
 
 ### 📊 GitHub 实时数据统计
 
-<div align="center">
-  <!-- 基础个人数据概览卡片（中文 + 等高对齐） -->
-  <img height="180" src="https://xiaohe-beige.vercel.app/api?username=hezhanleiok&show_icons=true&locale=cn&theme=default&hide_border=false" alt="GitHub 数据概览" />
-  <!-- 常用编程语言占比卡片（中文 + 等高对齐） -->
-  <img height="180" src="https://xiaohe-beige.vercel.app/api/top-langs/?username=hezhanleiok&layout=compact&locale=cn&theme=default&hide_border=false" alt="常用编程语言" />
-</div>
+<p align="center">
+  <!-- 基础个人数据概览卡片（无框扁平化 + 品牌蓝主色 + 中文） -->
+  <img src="https://xiaohe-beige.vercel.app/api?username=hezhanleiok&show_icons=true&locale=cn&hide_border=true&title_color=0052D9&icon_color=0052D9&text_color=333333&bg_color=00000000" alt="GitHub 数据概览" />
+  &nbsp;&nbsp;
+  <!-- 常用编程语言占比卡片（完整进度条视图 + 无框 + 品牌蓝主色 + 中文） -->
+  <img src="https://xiaohe-beige.vercel.app/api/top-langs/?username=hezhanleiok&locale=cn&hide_border=true&title_color=0052D9&text_color=333333&bg_color=00000000" alt="常用编程语言" />
+</p>
 
 ---
 
