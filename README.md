@@ -10,19 +10,19 @@
 <p>
   <!-- 博客网站 -->
   <a href="https://imxiaohe.com" target="_blank">
-    <img src="https://img.shields.io/badge/Website-imxiaohe.com-0052D9?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Website" />
+    <img src="https://img.shields.io/badge/Website-imxiaohe.com-0052D9?style=flat&logo=google-chrome&logoColor=white" alt="Website" />
   </a>
   <!-- YouTube 频道 -->
   <a href="https://www.youtube.com/@xiaoheai" target="_blank">
-    <img src="https://img.shields.io/badge/YouTube-小何爱分享-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube" />
+    <img src="https://img.shields.io/badge/YouTube-小何爱分享-FF0000?style=flat&logo=youtube&logoColor=white" alt="YouTube" />
   </a>
   <!-- X (Twitter) -->
   <a href="https://x.com/xiaoheyiyi" target="_blank">
-    <img src="https://img.shields.io/badge/X (Twitter)-@xiaoheyiyi-000000?style=for-the-badge&logo=x&logoColor=white" alt="X" />
+    <img src="https://img.shields.io/badge/X-@xiaoheyiyi-18181B?style=flat&logo=x&logoColor=white" alt="X" />
   </a>
   <!-- Telegram -->
   <a href="https://t.me/xiaoheok" target="_blank">
-    <img src="https://img.shields.io/badge/Telegram-@xiaoheok-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram" />
+    <img src="https://img.shields.io/badge/Telegram-@xiaoheok-26A5E4?style=flat&logo=telegram&logoColor=white" alt="Telegram" />
   </a>
 </p>
 
