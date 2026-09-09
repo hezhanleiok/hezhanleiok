@@ -29,14 +29,14 @@
 ---
 
 ### 📊 GitHub 实时数据统计
-*(此处专为浅色背景适配了明亮清爽的统计卡片)*
+*(通过 GitHub Actions 每日自动更新)*
 
 <p>
-  <!-- 基础数据统计卡片（浅色主题） -->
-  <img src="https://github-readme-stats.vercel.app/api?username=hezhanleiok&show_icons=true&theme=default&hide_border=false&count_private=true" alt="GitHub Stats" />
+  <!-- 基础个人数据概览卡片 -->
+  <img src="./profile-summary-card-output/default/0-profile-details.svg" alt="GitHub Stats" />
   
-  <!-- 常用编程语言占比卡片（浅色主题） -->
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=hezhanleiok&layout=compact&theme=default&hide_border=false" alt="Top Langs" />
+  <!-- 常用编程语言仓库占比卡片 -->
+  <img src="./profile-summary-card-output/default/1-repos-per-language.svg" alt="Top Langs" />
 </p>
 
 ---
