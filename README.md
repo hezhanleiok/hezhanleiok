@@ -28,14 +28,14 @@
 
 ---
 
-### 📊 GitHub 实时数据统计
+### 📊 GitHub 数据统计
 
 <p align="center">
-  <!-- 基础个人数据概览卡片（无框扁平化 + 品牌蓝主色 + 中文） -->
-  <img src="https://xiaohe-beige.vercel.app/api?username=hezhanleiok&show_icons=true&locale=cn&hide_border=true&title_color=0052D9&icon_color=0052D9&text_color=333333&bg_color=00000000" alt="GitHub 数据概览" />
+  <!-- 基础个人数据概览卡片（无框扁平化 + 品牌蓝主色 + 中文）— 由 Actions 每日预生成静态 SVG -->
+  <img src="./cards/github-stats.svg" alt="GitHub 数据概览" />
   &nbsp;&nbsp;
-  <!-- 常用编程语言占比卡片（完整进度条视图 + 无框 + 品牌蓝主色 + 中文） -->
-  <img src="https://xiaohe-beige.vercel.app/api/top-langs/?username=hezhanleiok&locale=cn&hide_border=true&title_color=0052D9&text_color=333333&bg_color=00000000" alt="常用编程语言" />
+  <!-- 常用编程语言占比卡片（完整进度条视图 + 无框 + 品牌蓝主色 + 中文）— 由 Actions 每日预生成静态 SVG -->
+  <img src="./cards/top-langs.svg" alt="常用编程语言" />
 </p>
 
 ---

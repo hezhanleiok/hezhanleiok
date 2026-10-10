@@ -1,0 +1,103 @@
+# 纯 GitHub 方案：克隆 xiaohe 卡片引擎 -> 本地启动 express API -> 用与原 Vercel 完全相同的参数
+# 生成静态 SVG 到 cards/ -> 校验通过且有变化才提交。不依赖 Vercel。
+name: Generate Stats Cards
+
+on:
+  push:
+    branches: [main]
+    paths: [".github/workflows/generate-stats-cards.yml"] # 推送工作流本身时自动跑一次（首次启用即生成卡片）
+  schedule:
+    - cron: "30 0 * * *" # 每天 UTC 0:30（北京时间 8:30）自动更新，与原卡片工作流错开
+  workflow_dispatch: # 支持手动触发
+
+permissions:
+  contents: write
+
+concurrency:
+  group: generate-stats-cards
+  cancel-in-progress: false
+
+env:
+  GH_USERNAME: ${{ github.repository_owner }}
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    name: render-svg-cards
+    steps:
+      - name: Checkout profile repo
+        uses: actions/checkout@v4
+
+      - name: Checkout card engine (xiaohe)
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/xiaohe
+          path: card-engine
+          persist-credentials: false # 子仓库不携带本仓库的推送凭证
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install dependencies
+        working-directory: card-engine
+        run: npm ci
+
+      - name: Start local card server
+        working-directory: card-engine
+        env:
+          PORT: 9000
+          # 卡片引擎的 retryer 只认 PAT_1 / PAT_2 ... 这样的环境变量名读取 GraphQL 凭证
+          # 默认 GITHUB_TOKEN 即可；如遇限流，创建经典 PAT（public repo 读取）存为 Secret CARDS_PAT
+          PAT_1: ${{ secrets.CARDS_PAT || secrets.GITHUB_TOKEN }}
+        run: |
+          node express.js > server.log 2>&1 &
+          echo $! > server.pid
+          for i in $(seq 1 30); do
+            if curl -s -o /dev/null "http://127.0.0.1:9000/"; then
+              echo "server ready"
+              break
+            fi
+            sleep 1
+          done
+
+      - name: Render cards (与原 Vercel 参数完全一致)
+        run: |
+          mkdir -p cards
+          base="http://127.0.0.1:9000"
+          curl -sf "${base}/api?username=${GH_USERNAME}&show_icons=true&locale=cn&hide_border=true&title_color=0052D9&icon_color=0052D9&text_color=333333&bg_color=00000000" \
+            -o cards/github-stats.svg
+          curl -sf "${base}/api/top-langs?username=${GH_USERNAME}&locale=cn&hide_border=true&title_color=0052D9&text_color=333333&bg_color=00000000" \
+            -o cards/top-langs.svg
+
+      - name: Validate cards (失败时渲染的是错误卡片，直接报错不提交)
+        run: |
+          set -e
+          for f in cards/*.svg; do
+            test -s "$f" || { echo "::error::$f is empty"; exit 1; }
+            grep -q "<svg" "$f" || { echo "::error::$f is not SVG"; exit 1; }
+            if grep -q "Something went wrong" "$f"; then
+              echo "::error::$f contains an error card:"
+              cat "$f"
+              exit 1
+            fi
+          done
+          echo "All cards OK"
+
+      - name: Stop local server
+        if: always()
+        run: |
+          [ -f card-engine/server.pid ] && kill "$(cat card-engine/server.pid)" 2>/dev/null || true
+
+      - name: Commit cards if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -z "$(git status --porcelain -- cards/)" ]; then
+            echo "No changes, skipping commit"
+          else
+            git add cards/
+            git commit -m "chore: auto-update stats cards [skip ci]"
+            git push
+          fi
