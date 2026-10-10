@@ -1,0 +1,4 @@
+# 卡片引擎依赖（CI 中由 npm ci 安装，永不提交）
+card-engine/node_modules/
+card-engine/server.log
+card-engine/server.pid
